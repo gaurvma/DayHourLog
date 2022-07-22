@@ -1,0 +1,100 @@
+
+<div class="container">
+  <div class="row">
+    <a class="" (click)="onClickAddDay(todayDate)"><i data-feather="calendar"></i><span>&nbsp; Today</span> </a><br>
+    <a class="" (click)="onClickAddDay(yesterdayDate)"><i data-feather="calendar"></i><span>&nbsp; Yesterday</span> </a><br>
+    <a class="" routerLink="/log/daily">- Daily</a><br>
+    <a class="" routerLink="/log/hourly">- Hourly</a>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="grid grid-cols-4 grid-rows-4  ">
+        <div class="bg-gray-400 text-center row-span-2">Important</div>
+        <div class="py-2 text-center">Yes</div>
+        <div class="py-2 bg-green-500 text-white text-center">{{graphData.important}}%</div>
+        <div class="py-2 bg-red-500 text-white text-center">{{graphData.urgentImportant}}%</div>
+        <div class="py-2 text-center">No</div>
+        <div class="py-2 bg-gray-200 text-center">{{graphData.none}}%</div>
+        <div class="py-2 bg-indigo-500 text-white text-center">{{graphData.urgent}}%</div>
+        <div class="row-span-2 col-span-2"></div>
+        <div class="py-2 text-center">No</div>
+        <div class="py-2 text-center">Yes</div>
+        <div class="py-2 text-center col-span-2">Urgent</div>
+      </div>
+    </div>
+    <form class="row">
+      <div class="overflow-hidden sm:rounded-md">
+        <div class="bg-white">
+          <h2 class="text-xl font-bold">
+            DATE: {{selectedWorkLog.date}}
+          </h2>
+            <div class="mt-4 space-y-4">
+              <div class="mt-1">
+                <textarea id="about" [(ngModel)]="selectedWorkLog.comment" name="about" rows="2" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="comment"></textarea>
+              </div>
+            </div>
+            <div class="mt-4 space-y-4">
+              <select name="country" [(ngModel)]="selectedWorkLog.statusText" autocomplete="country-name" class="mt-1 w-1/4 block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="Bed">Bed</option>
+                <option value="Normal">Normal</option>
+                <option value="Average">Average</option>
+                <option value="Good">Good</option>
+              </select>
+
+              <button class="px-4 py-1 bg-indigo-500 outline-none rounded text-white shadow-indigo-200 shadow-lg font-medium active:shadow-none active:scale-95 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:bg-gray-400/80 disabled:shadow-none disabled:cursor-not-allowed transition-colors duration-200" (click)="onUpdateWorkLog()">Save</button>
+            </div>
+
+        </div>
+      </div>
+    </form>
+    <div class="col-sm-12">
+      <table class="table table-primary table-responsive">
+         <thead>
+           <tr>
+             <th class="bg-blue-100 border text-left px-3 py-1" style="width:180px ;">Time</th>
+             <th class="bg-blue-100 border text-left px-3 py-1">Comment</th>
+             <th class="bg-blue-100 border text-left px-3 py-1">Actions</th>
+           </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let re of selectedWorkLog?.hourLog">
+              <td class="border px-1 py-1 text-center" >{{re.timing}}</td>
+              <td class="border px-1 py-1">
+                <textarea [(ngModel)]="re.comment"   rows="2" class="w-full border-0"></textarea>
+
+              </td>
+              <td class="border py-1 text-sm">
+                <div class="flex items-center items-start mb-1">
+                  <input id="checkbox-1" [(ngModel)]="re.isImportant" aria-describedby="checkbox-1" type="checkbox" class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                  <label for="checkbox-1" class="text-sm ml-3 font-medium text-gray-900">Important</label>
+                </div>
+                <div class="flex items-center items-start mb-1">
+                  <input id="checkbox-1" [(ngModel)]="re.isUrgent" aria-describedby="checkbox-1" type="checkbox" class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                  <label for="checkbox-1" class="text-sm ml-3 font-medium text-gray-900">Urgent</label>
+                </div>
+                <div class="flex items-center items-start mb-1">
+                  <input id="checkbox-1" [(ngModel)]="re.isQuick" aria-describedby="checkbox-1" type="checkbox" class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded" checked="">
+                  <label for="checkbox-1" class="text-sm ml-3 font-medium text-gray-900">Quick</label>
+                </div>
+
+                <!-- <span *ngIf="re.isImportant!=true" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight text-sm">
+                  <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                  <span class="relative text-sm">Important</span>
+                </span>
+                <span *ngIf="re.isUrgent!=true" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight text-sm">
+                  <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                  <span class="relative text-sm">Urgent</span>
+                </span>
+                <span *ngIf="re.isQuick!=true" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight text-sm">
+                  <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                  <span class="relative text-sm">Quick</span>
+                </span> -->
+              </td>
+
+            </tr>
+         </tbody>
+        </table>
+
+    </div>
+  </div>
+</div>
