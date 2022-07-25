@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       String(_d.getMonth()).padStart(2, '0') +
       '-' +
       _d.getFullYear();
-    // this.initWorkLog(this.todayDate);
+    this.initWorkLog(this.todayDate);
   }
 
   initWorkLog(date: string) {
@@ -301,7 +301,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
           let urgentVal = 0,importantVal = 0,urgentImportantVal = 0,noneVal = 0,totalCount = 0;
           this.selectedWorkLog.hourLog.forEach(el => {
-
             if(el.comment!=''){
               totalCount++;
               if(el.isImportant==true && el.isUrgent==true){ urgentImportantVal++;}
