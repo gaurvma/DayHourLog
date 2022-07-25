@@ -1,6 +1,6 @@
-# Daily Hourly Logger
+# Day Hourly Logger
 #### To record where you spend your time.
-A daily hourly logging in a simple way , In the 4 quadrants of time management matrix.
+A day hourly logging in a simple way , In the 4 quadrants of time management matrix.
 
 ![timemanagementmatrix](timemanagementmatrix.jpg)
 

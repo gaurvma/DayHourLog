@@ -1,5 +1,5 @@
 {
-  "name": "daily-hourly-logger",
+  "name": "day-hourly-log",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
